@@ -17,8 +17,8 @@
 	"phpunit/phpunit": "7"
   },
   "autoload": {
-	"psr-0": {
-	  "Small": "src/"
+	"psr-4": {
+	  "Small\\": "src/"
 	}
   }
 }
