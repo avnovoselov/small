@@ -1,7 +1,7 @@
 {
   "name": "avnovoselov/small",
   "description": "Some Small Helpers",
-  "type": "project",
+  "type": "library",
   "license": "MIT",
   "authors": [
 	{
@@ -18,7 +18,7 @@
   },
   "autoload": {
 	"psr-0": {
-	  "Snippet": "src/"
+	  "Small": "src/"
 	}
   }
 }
