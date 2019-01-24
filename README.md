@@ -1,8 +1,15 @@
 # Small
+Some Small Helpers
 
-## InterfaceDaemon
+## Installation
+```
+composer require avnovoselov/small
+```
 
-## AbstractDaemon
+## API
+### InterfaceDaemon
 
-## Arguments
+### AbstractDaemon
+
+### Arguments
 
