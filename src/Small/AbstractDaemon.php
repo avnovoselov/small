@@ -46,13 +46,6 @@ abstract class AbstractDaemon implements InterfaceDaemon
 	protected $sleep;
 
 	/**
-	 * Флаг проверять ли зависимости перед началом каждой итерации
-	 *
-	 * @var bool
-	 */
-	protected $skippable;
-
-	/**
 	 * @var Arguments
 	 *  Объект с аргументами запуска скрипта
 	 */
@@ -67,6 +60,22 @@ abstract class AbstractDaemon implements InterfaceDaemon
 	{
 		$this->printName();
 		$this->printStartDate();
+	}
+
+	/**
+	 * @inheritdoc
+	 */
+	public function environment(): InterfaceDaemon
+	{
+		return $this;
+	}
+
+	/**
+	 * @inheritdoc
+	 */
+	public function skip(): bool
+	{
+		return false;
 	}
 
 	/**
@@ -99,17 +108,14 @@ abstract class AbstractDaemon implements InterfaceDaemon
 	 * @see AbstractDaemon::$sleep
 	 *
 	 * Флаг, могут ли быть пропущенные итерации (напр.: отсутствие соединение с БД)
-	 * @param bool $skippable
-	 * @see AbstractDaemon::$skippable
 	 *
 	 * @return InterfaceDaemon $this;
 	 */
-	public function __construct(string $name, int $sleep = 1, bool $skippable = true)
+	public function __construct(string $name, int $sleep = 1)
 	{
 		$this->name = $name;
 		$this->startDate = date('c');
 		$this->sleep = $sleep;
-		$this->skippable = $skippable;
 
 		return $this;
 	}
