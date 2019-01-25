@@ -16,6 +16,7 @@ composer require avnovoselov/small
     * [AbstractDaemon::$arguments](#abstract-daemon-$arguments) - список аргументов
     * [AbstractDaemon::run()](#abstract-daemon-run) - запуск демона
     * [AbstractDaemon::__construct()](#abstract-daemon-__construct) - конструктор
+* Arguments
 
 
 ### Daemon
@@ -23,7 +24,7 @@ composer require avnovoselov/small
 Для создания нового демона следует расширить абстрактный класс `AbstractDaemon`
 и реализовать интерфейс `InterfaceDaemon`.
 
-<a name="interface-daemon-process">`InterfaceDaemon::process()`</a> - метод, выполняемый в каждой итерации (тело демона)
+<a name="interface-daemon-process" id="interface-daemon-process">`InterfaceDaemon::process()`</a> - метод, выполняемый в каждой итерации (тело демона)
 
 `Counter.php`
 ```php
@@ -43,7 +44,7 @@ class Counter extends \Small\AbstractDaemon
 если необходимо добавить условия выполнения итерации, следует реализовать метод
 `InterfaceDaemon::skip`
 
-<a name="interface-daemon-skip">`InterfaceDaemon::skip(): bool`</a> - метод, проверяющий удовлетворены ли условия для выполнения итерации.
+<a name="interface-daemon-skip" id="interface-daemon-skip">`InterfaceDaemon::skip(): bool`</a> - метод, проверяющий удовлетворены ли условия для выполнения итерации.
 Например подключение к БД.
 
 ```php
@@ -60,7 +61,7 @@ class Counter extends \Small\AbstractDaemon
 
 В примере выше метод `Counter::skip` пропускает итерации, запущенные в нечетные секунды
 
-<a name="interface-daemon-environment">`InterfaceDaemon::environment(): InterfaceDaemon`</a> - метод, определяющий настройки окружения
+<a name="interface-daemon-environment" id="interface-daemon-environment">`InterfaceDaemon::environment(): InterfaceDaemon`</a> - метод, определяющий настройки окружения
 (Настройки подключения в БД, отображение ошибок и т.д.).
 
 ```php
@@ -79,7 +80,7 @@ class Counter extends \Small\AbstractDaemon
 }
 ```
 
-<a name="abstract-daemon-arguments">`AbstractDaemon::arguments(array $defaultArguments = []): \Small\InterfaceDaemon`</a> - метод,
+<a name="abstract-daemon-arguments" id="abstract-daemon-arguments">`AbstractDaemon::arguments(array $defaultArguments = []): \Small\InterfaceDaemon`</a> - метод,
 определяющий аргументы вызова демона и устанавливающий значения по умолчанию.
 
 `daemon/counter.php`
@@ -98,7 +99,7 @@ $counterDaemon
 Для демона `$counterDaemon` доступен аргумент `--count`, со значения которого начнется счет
 в примере выше, аргумент `--count` имеет значение по умолчанию `0`.
 
-<a name="abstract-daemon-$arguments">`AbstractDaemon::$arguments`</a> - экземпляр класса `\Small\Arguments`,
+<a name="abstract-daemon-$arguments" id="abstract-daemon-$arguments">`AbstractDaemon::$arguments`</a> - экземпляр класса `\Small\Arguments`,
 обеспечивающий доступ к аргументам запуска демона.
 
 ```php
@@ -117,9 +118,9 @@ class Counter extends \Small\AbstractDaemon
 }
 ```
 
-<a name="abstract-daemon-run">`AbstractDaemon::run(): void`</a> - запуск демона
+<a name="abstract-daemon-run" id="abstract-daemon-run">`AbstractDaemon::run(): void`</a> - запуск демона
 
-<a name="abstract-daemon-__construct">`AbstractDaemon::__construct(string $name, int $sleep = 1): AbstractDaemon`</a> - конструктор демона
+<a name="abstract-daemon-__construct" id="abstract-daemon-__construct">`AbstractDaemon::__construct(string $name, int $sleep = 1): AbstractDaemon`</a> - конструктор демона
 
 * `$name` - имя демона
 * `$sleep` - задержка между итерациями (в секундах)
