@@ -12,7 +12,10 @@ $arguments = new \Small\Arguments([
 ]);
 ```
 
-## `function get(string $name)`
+## `protected $arguments: array`
+Хранилище аргументов
+
+## `public function get(string $name)`
 Получение значения аргумента `$name`
 
 ```php
@@ -27,7 +30,8 @@ if ($arguments->get('verbose')) {
 /> Hi, Developer!
 ```
 
-## `__construct(array $defaultArguments = [])`
+## `public __construct(array $defaultArguments = []): \Small\Arguments`
 Конструктор класса. Принимает массив с дефолтными значениями аргументов.
+
 Все аргументы, которые были переданы в `$defaultArguments` будут доступны
-через `$arguments->get(<name>)`, все остальные будут проигнорированы.
+через `$arguments->get(<name>)`, все остальные аргументы **доступны не будут**.

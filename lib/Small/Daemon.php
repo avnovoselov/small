@@ -95,7 +95,7 @@ abstract class Daemon extends Script implements DaemonInterface
 	 *
 	 * @return static $this;
 	 */
-	public function __construct(string $name, int $sleep = 1)
+	final public function __construct(string $name, int $sleep = 1)
 	{
 		parent::__construct($name);
 
@@ -171,11 +171,11 @@ abstract class Daemon extends Script implements DaemonInterface
 	 *    если передан параметр $lastRunDate будет установлено его значение,
 	 *    в противном случае - текущие дата и время
 	 *
-	 * @param string $lastRunDate
+	 * @param string $date
 	 * @return void
 	 */
-	protected function setLastRunDate(string $lastRunDate = '')
+	protected function setLastRunDate(string $date = '')
 	{
-		$this->lastRunDate = $lastRunDate ?: date('c');
+		$this->lastRunDate = $date ?: date('c');
 	}
 }
