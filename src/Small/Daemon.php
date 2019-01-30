@@ -12,24 +12,8 @@ namespace Small;
  * Class Daemon
  * @package Small
  */
-abstract class AbstractDaemon implements InterfaceDaemon
+abstract class Daemon extends Script implements DaemonInterface
 {
-	/**
-	 * Имя демона
-	 *
-	 * @var string
-	 */
-	public $name;
-
-	/**
-	 * Дата запуска демона в формате ISO-8601
-	 *    <?php
-	 *        ...
-	 *        $this->startDate = date('c');
-	 * @var string
-	 */
-	protected $startDate;
-
 	/**
 	 * Дата последней итерации демона в формате ISO-8601
 	 *
@@ -65,7 +49,7 @@ abstract class AbstractDaemon implements InterfaceDaemon
 	/**
 	 * @inheritdoc
 	 */
-	public function environment(): InterfaceDaemon
+	public function environment(): DaemonInterface
 	{
 		return $this;
 	}
@@ -101,55 +85,28 @@ abstract class AbstractDaemon implements InterfaceDaemon
 	 *
 	 * Имя демона
 	 * @param string $name
-	 * @see AbstractDaemon::name
+	 * @see AbstractScript::name
 	 *
 	 * Задержка между итерациями
 	 * @param int $sleep
-	 * @see AbstractDaemon::$sleep
+	 * @see Daemon::$sleep
 	 *
 	 * Флаг, могут ли быть пропущенные итерации (напр.: отсутствие соединение с БД)
 	 *
-	 * @return InterfaceDaemon $this;
+	 * @return static $this;
 	 */
 	public function __construct(string $name, int $sleep = 1)
 	{
-		$this->name = $name;
-		$this->startDate = date('c');
+		parent::__construct($name);
+
 		$this->sleep = $sleep;
 
 		return $this;
 	}
 
 	/**
-	 * Добавляет возможность получать аргументы, переданные при вызове скрипта
-	 *
-	 * аргументы по умолчанию
-	 * @param array $defaultArguments
-	 *
-	 *    Напр.:
-	 *    <?php
-	 *    ...
-	 *    $foo->arguments(["myparam" => 1]);
-	 *
-	 *    для скрипт, вызванного без параметров shell/> php foo.php
-	 *        echo $this->args->get('myparam'); // 1
-	 *
-	 *    для скрипта shell/> php foo.php --myparam=3
-	 *        echo $this->args->get('myparam'); // 3
-	 *
-	 * @return AbstractDaemon $this;
-	 */
-	final public function arguments(array $defaultArguments = [])
-	{
-		$this->arguments = new Arguments($defaultArguments);
-		$this->arguments->process();
-
-		return $this;
-	}
-
-	/**
 	 * Запуск демона
-	 *    реализует бесконечный цикл, в каждой итерации которого выполняет метод @see InterfaceDaemon::process
+	 *    реализует бесконечный цикл, в каждой итерации которого выполняет метод @see DaemonInterface::process
 	 *
 	 * @return void
 	 */
@@ -182,9 +139,9 @@ abstract class AbstractDaemon implements InterfaceDaemon
 	 *
 	 * @return void
 	 */
-	final protected function printName()
+	protected function printName()
 	{
-		echo PHP_EOL . " Daemon: {$this->name}";
+		$this->terminal->success("Daemon:", $this->name);
 	}
 
 	/**
@@ -193,9 +150,9 @@ abstract class AbstractDaemon implements InterfaceDaemon
 	 *
 	 * @return void
 	 */
-	final protected function printStartDate()
+	protected function printStartDate()
 	{
-		echo PHP_EOL . " start at {$this->startDate}";
+		$this->terminal->info("start at", $this->startDate);
 	}
 
 	/**
@@ -206,7 +163,7 @@ abstract class AbstractDaemon implements InterfaceDaemon
 	 */
 	protected function printSkip()
 	{
-		echo PHP_EOL . " iteration skipped at " . date('c');
+		$this->terminal->warning("iteration skipped at", date('c'));
 	}
 
 	/**
@@ -217,7 +174,7 @@ abstract class AbstractDaemon implements InterfaceDaemon
 	 * @param string $lastRunDate
 	 * @return void
 	 */
-	final protected function setLastRunDate(string $lastRunDate = '')
+	protected function setLastRunDate(string $lastRunDate = '')
 	{
 		$this->lastRunDate = $lastRunDate ?: date('c');
 	}

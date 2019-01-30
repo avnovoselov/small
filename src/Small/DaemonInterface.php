@@ -9,10 +9,10 @@
 namespace Small;
 
 /**
- * Interface InterfaceDaemon
+ * Interface DaemonInterface
  * @package Small
  */
-interface InterfaceDaemon
+interface DaemonInterface
 {
 	/**
 	 * Метод, реализующий итерацию демона
@@ -40,9 +40,9 @@ interface InterfaceDaemon
 	 *  * настройка отображения ошибок
 	 *  etc
 	 *
-	 * @return InterfaceDaemon
+	 * @return DaemonInterface
 	 */
-	public function environment(): InterfaceDaemon;
+	public function environment(): DaemonInterface;
 
 	/**
 	 * Запускает бесконечный цикл
