@@ -67,7 +67,6 @@ abstract class Script
 	final public function arguments(array $defaultArguments = [])
 	{
 		$this->arguments = new Arguments($defaultArguments);
-		$this->arguments->process();
 
 		return $this;
 	}

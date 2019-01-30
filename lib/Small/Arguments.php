@@ -22,28 +22,6 @@ class Arguments
 	protected $arguments = [];
 
 	/**
-	 * Разбирает аргументы, переданные в скрипт
-	 *
-	 * @return Arguments $this;
-	 */
-	final public function process()
-	{
-		// собираем параметр $longopts для функции getopt($shortopts, $longopts)
-		// приводим ключи массива значений аргументов по умолчанию к виду ["<key>":: => <defaultValue>]
-		// :: - указывает на необязательный аргумент
-		$_arguments = array_map(function ($el) {
-			return "{$el}::";
-		}, array_keys($this->arguments));
-
-		$option = getopt("", $_arguments);
-
-		// перезаписываем значения по умолчанию переданными аргументами
-		$this->arguments = array_merge($this->arguments, $option);
-
-		return $this;
-	}
-
-	/**
 	 * Возвращает значение аргумента
 	 *
 	 * @param string $name
@@ -63,6 +41,18 @@ class Arguments
 	final public function __construct(array $defaultArguments = [])
 	{
 		$this->arguments = $defaultArguments;
+
+		// собираем параметр $longopts для функции getopt($shortopts, $longopts)
+		// приводим ключи массива значений аргументов по умолчанию к виду ["<key>":: => <defaultValue>]
+		// :: - указывает на необязательный аргумент
+		$_arguments = array_map(function ($el) {
+			return "{$el}::";
+		}, array_keys($defaultArguments));
+
+		$option = getopt("", $_arguments);
+
+		// перезаписываем значения по умолчанию переданными аргументами
+		$this->arguments = array_merge($defaultArguments, $option);
 
 		return $this;
 	}
