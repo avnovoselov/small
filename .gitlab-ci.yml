@@ -13,4 +13,4 @@ before_script:
 test:app:
   script:
     - vendor/bin/phpunit --configuration tests/phpunit.xml --coverage-text
-  allow_failure: true
+  allow_failure: false
