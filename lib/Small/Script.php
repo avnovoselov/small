@@ -9,7 +9,7 @@
 namespace Small;
 
 
-abstract class Script
+class Script
 {
 	/**
 	 * Имя скрипта
