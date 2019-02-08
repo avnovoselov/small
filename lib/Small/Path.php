@@ -62,6 +62,15 @@ class Path
 	}
 
 	/**
+	 * @param string ...$parts
+	 * @return Path
+	 */
+	public function path(string ... $parts)
+	{
+		return call_user_func_array([clone $this, 'add'], $parts);
+	}
+
+	/**
 	 * @return string
 	 */
 	public function getPath()
