@@ -43,11 +43,4 @@ interface DaemonInterface
 	 * @return DaemonInterface
 	 */
 	public function environment(): DaemonInterface;
-
-	/**
-	 * Запускает бесконечный цикл
-	 *
-	 * @return void
-	 */
-	public function run();
 }

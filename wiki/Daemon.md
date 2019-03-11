@@ -1,8 +1,11 @@
-# Daemon
+# Daemon и DaemonInterface
 
 `\Small\Daemon.php`
 
-Абстрактный класс для создания демонов.
+Абстрактный класс и интерфейс для создания демонов.
+
+Экземпляр конкретного демона должен наследовать абстрактный класс `Small\Daemon`
+и реализовать интерфейс `Small\DaemonInterface`
 
 ## `protected $lastRunDate: string`
 Дата и время последнего запуска итерации демона (строка в формате ISO-8601 `date('c')`).
@@ -11,7 +14,10 @@
 Задержка между итерациями (в секундах).
 
 ## `protected $arguments: \Small\Arguments`
-Экземпляр класс `Small\Arguments` для доступа к аргументам скрипта.
+Экземпляр класса `Small\Arguments` для доступа к аргументам скрипта.
+
+## `protected $terminal: \Small\Terminal`
+Экземпляр класса `Small\Terminal` для вывода в терминал
 
 ## `public function printWelcome(string $name): void`
 Выводит приветственное сообщение.
@@ -33,11 +39,25 @@
 Выводит сообщение с временем демона.
 
 ## `protected function printSkip()`
-Выводит сообщение с причиной пропуска итерации.
+Выводит сообщение с датой пропуска итерации.
 
 ## `protected function setLastRunDate(string $date = '')`
 Устанавливает время последнего запуска. Если параметр `$date` не передан,
 будет установлена текущая дата и время в формате ISO-8601 `date('c')`.
+
+## Методы, обязательные для реализаии:
+
+## `public function process(): void`
+Метод, реализующий итерацию демона `Small\DaemonInterface` - **обязателен для
+реализации**.
+
+## `public function skip(): boolean`
+Метод, проверяющий следует ли пропустить следующую итерацию (Напр.: отсутствие подключения к БД).
+* `return false;` - не пропускать
+* `return true;` - пропустить
+
+## `public function environment(): \Small\DaemonInterface`
+Метод, устанавливающий настройки окружения.
 
 
 ```php

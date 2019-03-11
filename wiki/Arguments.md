@@ -7,7 +7,7 @@
 ```php
 // foo.php
 $arguments = new \Small\Arguments([
-    "verbose"   => false,
+    "verbose"   => 0,
     "name"      => "User",
 ]);
 ```

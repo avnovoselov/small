@@ -11,6 +11,7 @@ composer require avnovoselov/small
 * <a href="./wiki/Arguments.md">Arguments</a> - класс для работы с аргументами скрипта
 * <a href="./wiki/Daemon.md">Daemon</a> - абстрактный класс демона
 * <a href="./wiki/DaemonInterface.md">DaemonInterface</a> - интерфейс демона
+* <a href="./wiki/Path.md">Path</a> - работа с путями
 * <a href="./wiki/Script.md">Script</a> - абстрактный класс скрипта
 * <a href="./wiki/Terminal.md">Terminal</a> - класс для работы с выводом в терминал
 
